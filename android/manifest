@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.0.0
+apiversion: 4
+architectures: arm64-v8a armeabi-v7a x86 x86_64
+description: focusView
+author: Micheal Gangolf
+license: MIT
+copyright: Copyright (c) 2023 by Micheal Gangolf
+
+# these should not be edited
+name: focusView
+moduleid: ti.focusView
+guid: 480e2c84-9c34-4832-b851-e55caab7a30b
+platform: android
+minsdk: 12.1.2.GA
