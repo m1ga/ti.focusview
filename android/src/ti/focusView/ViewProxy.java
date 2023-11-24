@@ -7,6 +7,7 @@
  */
 package ti.focusView;
 
+import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
@@ -27,6 +28,8 @@ import org.appcelerator.titanium.TiDimension;
 import org.appcelerator.titanium.proxy.TiViewProxy;
 import org.appcelerator.titanium.util.TiConvert;
 import org.appcelerator.titanium.view.TiUIView;
+
+import java.util.ArrayList;
 
 
 @Kroll.proxy(creatableInModule = FocusViewModule.class)
@@ -164,6 +167,7 @@ public class ViewProxy extends TiViewProxy {
         public void animateBox(KrollDict kd) {
 
             AnimatorSet bouncer = new AnimatorSet();
+            ArrayList<Animator> playSet = new ArrayList<>();
 
             ValueAnimator animator = new ValueAnimator();
             if (kd.containsKeyAndNotNull("width")) {
@@ -175,6 +179,7 @@ public class ViewProxy extends TiViewProxy {
                     innerWidth = (int) animation.getAnimatedValue();
                     paintView.invalidate();
                 });
+                playSet.add(animator);
             }
 
             ValueAnimator animator2 = new ValueAnimator();
@@ -187,6 +192,7 @@ public class ViewProxy extends TiViewProxy {
                     innerHeight = (int) animation.getAnimatedValue();
                     paintView.invalidate();
                 });
+                playSet.add(animator2);
             }
 
             ValueAnimator animator3 = new ValueAnimator();
@@ -199,6 +205,7 @@ public class ViewProxy extends TiViewProxy {
                     innerLeft = (int) animation.getAnimatedValue();
                     paintView.invalidate();
                 });
+                playSet.add(animator3);
             }
 
             ValueAnimator animator4 = new ValueAnimator();
@@ -211,6 +218,7 @@ public class ViewProxy extends TiViewProxy {
                     innerTop = (int) animation.getAnimatedValue();
                     paintView.invalidate();
                 });
+                playSet.add(animator4);
             }
 
             ValueAnimator animator5 = new ValueAnimator();
@@ -222,6 +230,7 @@ public class ViewProxy extends TiViewProxy {
                     opacity = (float) animation.getAnimatedValue();
                     paintView.invalidate();
                 });
+                playSet.add(animator5);
             }
 
             ValueAnimator animator6 = new ValueAnimator();
@@ -234,6 +243,7 @@ public class ViewProxy extends TiViewProxy {
                     borderRadius = (int) animation.getAnimatedValue();
                     paintView.invalidate();
                 });
+                playSet.add(animator6);
             }
 
             ValueAnimator animator7 = new ValueAnimator();
@@ -246,10 +256,10 @@ public class ViewProxy extends TiViewProxy {
                     radius = (int) animation.getAnimatedValue();
                     paintView.invalidate();
                 });
+                playSet.add(animator7);
             }
-
             bouncer.setDuration(TiConvert.toInt(kd.getString("duration"), 1000));
-            bouncer.playTogether(animator2, animator, animator4, animator5, animator3, animator6, animator7);
+            bouncer.playTogether(playSet);
             bouncer.start();
         }
 
